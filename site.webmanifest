@@ -1,0 +1,15 @@
+{
+  "name": "Galerieladen kunst-a-bunt am Kollwitzplatz",
+  "short_name": "kunst-a-bunt",
+  "description": "Antiquitäten, Lampen, Kunst & Grafik im Prenzlauer Berg, Berlin.",
+  "lang": "de",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#444444",
+  "theme_color": "#ff9900",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" }
+  ]
+}
