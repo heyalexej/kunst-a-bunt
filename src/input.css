@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/* =========================================================
+   Design-Tokens (Markenfarben & Schrift) – zentrale Quelle.
+   Über @theme stehen sie auch als Tailwind-Utilities bereit
+   (z. B. bg-brand, text-ink, text-ink-soft).
+   ========================================================= */
+@theme {
+  --color-brand:      #ff9900;   /* Orange */
+  --color-brand-dark: #e07e00;
+  --color-paper:      #444444;   /* dunkler Hintergrund */
+  --color-ink:        #241a00;   /* Text auf Orange */
+  --color-ink-soft:   #5a4a1f;   /* sekundärer Text */
+  --color-link:       #6b3e00;
+  --font-sans: "Segoe UI", Segoe, "Trebuchet MS", Verdana, "DejaVu Sans", sans-serif;
+}
+
+:root{
+  --line:rgba(0,0,0,.18);
+  --maxw:940px;
+}
+
+/* ---- Preflight-Ausgleich: Überschriften & Inhaltslisten ---- */
+@layer base{
+  h1{font-size:1.85rem;line-height:1.15;font-weight:700;margin:.1em 0 .5em;}
+  main ul:not([class]){list-style:disc;padding-left:1.25em;margin:.6em 0;}
+  main ul:not([class]) li{margin:.25em 0;}
+}
+
+@layer components{
+
+  body{
+    @apply bg-paper text-ink;
+    font-family:var(--font-sans);
+    font-size:17px;line-height:1.6;letter-spacing:.2px;
+  }
+  html{-webkit-text-size-adjust:100%;}
+  img{max-width:100%;height:auto;display:block;}
+
+  a{color:var(--color-link);text-decoration:underline;text-underline-offset:2px;}
+  a:hover,a:focus{color:#000;}
+
+  /* ---- Rahmen / Karte ---- */
+  .wrap{
+    @apply bg-brand;
+    max-width:var(--maxw);
+    margin:24px auto;
+    padding:clamp(18px,4vw,40px);
+    box-shadow:0 10px 40px rgba(0,0,0,.35);
+  }
+
+  /* ---- Kopf ---- */
+  .site-head{
+    display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+    gap:12px 24px;padding-bottom:14px;border-bottom:1px solid var(--line);
+  }
+  .brand{@apply text-ink;display:block;text-decoration:none;}
+  .brand:hover{@apply text-ink;}
+  .brand .logo{font-size:clamp(2rem,7vw,3.2rem);line-height:1;margin:0;font-weight:700;letter-spacing:.5px;}
+  .brand .sub{font-size:1.05rem;font-weight:400;margin-top:2px;}
+  .head-info{text-align:right;font-size:.95rem;line-height:1.45;font-style:italic;}
+  .head-info a{@apply text-ink;}
+
+  /* ---- Navigation ---- */
+  .nav{margin:16px 0 4px;display:flex;flex-wrap:wrap;gap:6px 22px;font-style:italic;font-size:1.15rem;}
+  .nav a{@apply text-ink;text-decoration:none;padding:4px 0;border-bottom:2px solid transparent;}
+  .nav a:hover,.nav a:focus{border-bottom-color:var(--color-ink);}
+  .nav a[aria-current="page"]{border-bottom-color:var(--color-ink);font-weight:700;}
+
+  /* ---- Inhalt ---- */
+  main{margin-top:8px;}
+  .lead{font-size:1.15rem;}
+  h2{font-size:1.5rem;margin:1.6em 0 .4em;font-weight:700;}
+  h3{font-size:1.15rem;margin:1.2em 0 .3em;}
+  p{margin:.6em 0;}
+
+  /* Zwei-Spalten Startseite */
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,34px);align-items:start;margin-top:14px;}
+  .hero .photo{box-shadow:0 6px 22px rgba(0,0,0,.3);}
+
+  /* Kategorie-Kacheln */
+  .cats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:14px;list-style:none;padding:0;}
+  .cats a{@apply text-ink;display:block;text-decoration:none;background:rgba(0,0,0,.06);border:1px solid var(--line);}
+  .cats a:hover{background:rgba(0,0,0,.12);}
+  .cats figcaption{padding:8px 10px;font-style:italic;font-weight:700;font-size:1.05rem;}
+
+  /* Kontakt / Adresse */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;}
+  .contact-grid address{font-style:normal;line-height:1.8;}
+  .btn{
+    @apply bg-ink text-brand;
+    display:inline-block;margin:6px 8px 6px 0;padding:10px 16px;
+    text-decoration:none;font-weight:700;border-radius:4px;
+  }
+  .btn:hover{background:#000;}
+
+  /* ---- Ausstellungs-Liste: gemeinsames Grid je Jahr,
+       Datum-Spalte = Breite des längsten Datums, immer einzeilig ---- */
+  .jahr{margin-top:1.4em;display:grid;grid-template-columns:max-content 1fr;}
+  .jahr h2{grid-column:1 / -1;margin:0 0 .2em;border-bottom:1px solid var(--line);padding-bottom:4px;}
+  .expo{display:contents;}
+  .datum{@apply text-ink-soft;white-space:nowrap;font-variant-numeric:tabular-nums;padding:7px 2rem 7px 0;border-bottom:1px solid rgba(0,0,0,.08);}
+  .titel{font-weight:600;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.08);}
+  .note{@apply text-ink-soft;font-style:italic;white-space:normal;}
+
+  /* ---- Fuß ---- */
+  .site-foot{margin-top:26px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.9rem;}
+  .site-foot a{color:#5a3500;text-decoration:none;}
+  .site-foot a:hover{text-decoration:underline;color:#000;}
+  .site-foot .copy{margin-left:auto;@apply text-ink-soft;}
+
+  /* Fließtext-Block (Datenschutz/Impressum) */
+  .prose{max-width:75ch;}
+  .prose h2{font-size:1.25rem;}
+
+  /* ---- Responsive ---- */
+  @media (max-width:760px){
+    body{font-size:16px;}
+    .site-head{flex-direction:column;align-items:flex-start;}
+    .head-info{text-align:left;}
+
+    /* Navigation: eine wischbare Zeile statt Umbruch */
+    .nav{
+      flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
+      scrollbar-width:none;gap:0 20px;padding-bottom:8px;
+      -webkit-mask-image:linear-gradient(to right,#000 88%,transparent 100%);
+              mask-image:linear-gradient(to right,#000 88%,transparent 100%);
+    }
+    .nav::-webkit-scrollbar{display:none;}
+    .nav a{white-space:nowrap;flex:0 0 auto;}
+
+    .hero{grid-template-columns:1fr;}
+    .cats{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+
+    /* Liste stapelt: Datum über Titel */
+    .jahr{grid-template-columns:1fr;}
+    .datum{white-space:normal;font-size:.9rem;padding:8px 0 1px;border-bottom:0;}
+    .titel{padding:0 0 9px;}
+
+    .site-foot .copy{margin-left:0;width:100%;}
+  }
+
+  /* Fokus & Skip-Link */
+  a:focus-visible,.btn:focus-visible{outline:3px solid #000;outline-offset:2px;}
+  .skip{position:absolute;left:-999px;top:0;background:#000;color:#fff;padding:8px 14px;z-index:10;}
+  .skip:focus{left:8px;top:8px;}
+}
